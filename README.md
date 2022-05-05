@@ -10,6 +10,19 @@ PWA를 공부하기 위한 프로젝트 입니다!
 4. active event 발생
 5. Service worker listens for events
 
+![image](https://user-images.githubusercontent.com/63354527/166856289-056c44bf-2cbc-4b66-8161-672f3ad79202.png)
+
+## Git flow
+
+![image](https://user-images.githubusercontent.com/63354527/166854992-6418300a-2880-4ce2-9515-bf5f3e3c6d77.png)
+
+이 프로젝트는 git flow를 사용합니다.
+
+```sh
+git flow feature start <feature-name> # 새로운 기능을 추가하기 위한 feature/<feature-name> 브랜치를 생성한다.
+git rebase -i HEAD~3 # 3개의 커밋 메시지를 합쳐준다 만약에 2개를 합치고 싶으면 2를 적으면 된다.
+```
+
 ## 공부자료
 
 - [Frameworks and Tools for Progressive Web Apps (GDD India '17)](https://youtu.be/Da0EjdG5DlE)
