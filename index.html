@@ -5,12 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pwa-contacts</title>
+    <link rel="manifest" href="manifest.json" />
     <link type="text/css" href="css/materialize.min.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <link type="text/css" href="css/styles.css" rel="stylesheet" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="icons/icon-96.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#00695c" />
+    <meta name="theme-color" content="#00695c" />
+    <!-- ios support -->
+
     <script type="text/javascript" src="js/materialize.min.js"></script>
   </head>
   <body class="teal lighten-5">
@@ -85,6 +92,7 @@
       </form>
     </div>
 
+    <script src="js/app.js" type="text/javascript"></script>
     <script src="js/common.js" type="text/javascript"></script>
   </body>
 </html>
