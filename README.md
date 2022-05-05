@@ -21,6 +21,9 @@ PWA를 공부하기 위한 프로젝트 입니다!
 ```sh
 git flow feature start <feature-name> # 새로운 기능을 추가하기 위한 feature/<feature-name> 브랜치를 생성한다.
 git rebase -i HEAD~3 # 3개의 커밋 메시지를 합쳐준다 만약에 2개를 합치고 싶으면 2를 적으면 된다.
+# 로컬 커밋을 합치면 원격 저장소와 커밋내용이 달라짐
+git push -f origin feature/<feature-name> # 원격에 강제 푸쉬
+git flow feature finish <feature-name> # feature브랜치를 develop에 머지
 ```
 
 ## 공부자료
