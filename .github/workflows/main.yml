@@ -6,13 +6,14 @@ on:
       - main
 
 jobs:
-  first-job:
-    name: 'First'
+  deploy:
+    name: 'gogo'
 
     runs-on: 'ubuntu-latest'
 
     steps:
-      - name: 'Say Hello wolrd'
-        shell: bash
-        run: |
-          echo "hello world"
+      - name: 'deploy to netlify'
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: netlify deploy .
