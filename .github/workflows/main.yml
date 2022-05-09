@@ -1,19 +1,19 @@
-name: 'Automate deploy on Netlify'
+# name: 'Automate deploy on Netlify'
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  deploy:
-    name: 'gogo'
+# jobs:
+#   deploy:
+#     name: 'gogo'
 
-    runs-on: 'ubuntu-latest'
+#     runs-on: 'ubuntu-latest'
 
-    steps:
-      - name: 'deploy to netlify'
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: netlify deploy --prod --dir=.
+#     steps:
+#       - name: 'deploy to netlify'
+#         env:
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#         run: netlify deploy --prod --dir=.
