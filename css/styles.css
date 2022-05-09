@@ -90,3 +90,7 @@ form .input-field {
   font-size: 18px;
   align-items: center;
 }
+
+.material-icons {
+  cursor: pointer;
+}

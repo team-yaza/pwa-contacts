@@ -35,11 +35,17 @@ request.onsuccess = () => {
   store.put({ id: 1, name: '이현진', phone: '010-1234-5678' });
   store.put({ id: 2, name: '윤지영', phone: '010-1234-5678' });
   store.put({ id: 3, name: '박지성', phone: '010-1234-5678' });
+
+  const getRequest = store.getAll();
+
+  getRequest.onsuccess = function (event) {
+    renderContacts(getRequest.result);
+  };
 };
 
-const getObjectStore = (storeName, mode) => {
-  return db?.transaction(storeName, mode).objectStore(storeName);
-};
+// const getObjectStore = (storeName, mode) => {
+//   return db?.transaction(storeName, mode).objectStore(storeName);
+// };
 
 const form = document.querySelector('form');
 
@@ -53,11 +59,15 @@ form.addEventListener('submit', async (event) => {
     name: form.name.value,
     number: form.numbers.value,
   };
-  console.log('hi');
-  // let store = getObjectStore(DB_STORE_NAME, 'readwrite');
+
   const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
-  const contacts = transaction.objectStore('contacts');
+  const contacts = transaction.objectStore(DB_STORE_NAME);
+
   contacts.add(contact);
+
+  form.name.value = '';
+  form.numbers.value = '';
+  form.name.focus();
   // const store = transaction.objectStore(DB_STORE_NAME);
   // let result;
   // try {
@@ -67,4 +77,57 @@ form.addEventListener('submit', async (event) => {
   // result.onsuccess = () => {
   //   console.log('hi');
   // };
+});
+
+const renderContacts = (contacts) => {
+  console.log(contacts);
+
+  const html = contacts
+    .map(
+      (contact, index) => `
+  <div class="grey-text text-darken-1 pk-contact" >
+    <div class="contact-image">
+      <img src="img/pkcontacts.png" alt="contact thumb" />
+    </div>
+    <div class="contact-details">
+      <div class="contact-title">${contact.name}</div>
+      <div class="contact-numbers">${contact.phone}</div>
+    </div>
+    <div class="contact-options">
+      <i class="material-icons">call</i>
+      <i class="material-icons" data-index=${index}>delete_outline</i>
+    </div>
+  </div>  
+  `
+    )
+    .join('');
+
+  const contactsList = document.querySelector('.contacts');
+
+  contactsList.innerHTML = html;
+};
+
+const contactsList = document.querySelector('.contacts');
+contactsList.addEventListener('click', (event) => {
+  console.log(event);
+  console.log(event.target.tagName);
+  console.log(event.target.getAttribute('data-index'));
+  if (event.target.tagName === 'I') {
+    const index = event.target.dataset.index;
+    console.log(index);
+    const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
+    const store = transaction.objectStore(DB_STORE_NAME);
+    // 이거왜 안되는지 모르겠음 ㅠㅠ
+    const deleteRequest = store.delete(event.target.getAttribute('data-index'));
+
+    transaction.oncomplete = () => {
+      console.log(deleteRequest);
+    };
+
+    const getRequest = store.getAll();
+
+    getRequest.onsuccess = function (event) {
+      renderContacts(getRequest.result);
+    };
+  }
 });
