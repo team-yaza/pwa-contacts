@@ -1,6 +1,8 @@
 # PWA 연락처 앱
 
-PWA를 공부하기 위한 프로젝트 입니다!
+PWA를 공부하기 위한 프로젝트 입니다.
+
+Progressive Web App이란, `점진적(Progressive)`으로 `진화(Enhancement)`할 수 있는 앱이다. 이미 완성된 앱을 PWA의 feature를 추가해서 PWA로 전환할 수 있다.
 
 ## Service Worker LifeCycle
 
@@ -16,7 +18,7 @@ PWA를 공부하기 위한 프로젝트 입니다!
 
 ![image](https://user-images.githubusercontent.com/63354527/166854992-6418300a-2880-4ce2-9515-bf5f3e3c6d77.png)
 
-이 프로젝트에서는 git flow를 연습합니다!
+이 프로젝트에서는 git flow를 연습합니다.
 
 ```sh
 git flow feature start <feature-name> # 새로운 기능을 추가하기 위한 feature/<feature-name> 브랜치를 생성한다.
@@ -29,3 +31,4 @@ git flow feature finish <feature-name> # feature브랜치를 develop에 머지
 ## 공부자료
 
 - [Frameworks and Tools for Progressive Web Apps (GDD India '17)](https://youtu.be/Da0EjdG5DlE)
+- [Progressive Web Apps Tutorial for Beginners (Academind)](https://youtu.be/dap6yIe1uK4)
