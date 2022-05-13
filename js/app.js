@@ -32,10 +32,6 @@ request.onsuccess = () => {
   const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
   const store = transaction.objectStore(DB_STORE_NAME);
 
-  // store.put({ id: 1, name: '이현진', phone: '010-1234-5678' });
-  // store.put({ id: 2, name: '윤지영', phone: '010-1234-5678' });
-  // store.put({ id: 3, name: '박지성', phone: '010-1234-5678' });
-
   const getRequest = store.getAll();
 
   getRequest.onsuccess = function (event) {
@@ -122,27 +118,8 @@ contactsList.addEventListener('click', (event) => {
     );
     localStorage.setItem('contacts', JSON.stringify(filteredContacts));
     renderContacts(filteredContacts);
-    // const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
-    // const store = transaction.objectStore(DB_STORE_NAME);
-    // 이거왜 안되는지 모르겠음 ㅠㅠ
-    // const deleteRequest = store.delete(event.target.getAttribute('data-index'));
-
-    // transaction.oncomplete = () => {
-    //   console.log(deleteRequest);
-    // };
-
-    // const getRequest = store.getAll();
-
-    // getRequest.onsuccess = function (event) {
-    //   renderContacts(getRequest.result);
-    // };
   }
 });
-
-// window.addEventListener('DOMContentLoaded', () => {
-//   console.log(JSON.parse(localStorage.getItem('contacts')));
-//   renderContacts(JSON.parse(localStorage.getItem('contacts')));
-// });
 
 setTimeout(() => {
   console.log(JSON.parse(localStorage.getItem('contacts')));
