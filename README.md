@@ -1,6 +1,7 @@
 # PWA 연락처 앱
 
 PWA를 공부하기 위한 프로젝트 입니다.
+
 Progressive Web App이란, `점진적(Progressive)`으로 `진화(Enhancement)`할 수 있는 앱이다. 이미 완성된 앱을 PWA의 feature를 추가해서 PWA로 전환할 수 있다.
 
 ## Service Worker LifeCycle

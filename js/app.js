@@ -32,9 +32,9 @@ request.onsuccess = () => {
   const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
   const store = transaction.objectStore(DB_STORE_NAME);
 
-  store.put({ id: 1, name: '이현진', phone: '010-1234-5678' });
-  store.put({ id: 2, name: '윤지영', phone: '010-1234-5678' });
-  store.put({ id: 3, name: '박지성', phone: '010-1234-5678' });
+  // store.put({ id: 1, name: '이현진', phone: '010-1234-5678' });
+  // store.put({ id: 2, name: '윤지영', phone: '010-1234-5678' });
+  // store.put({ id: 3, name: '박지성', phone: '010-1234-5678' });
 
   const getRequest = store.getAll();
 
@@ -49,7 +49,7 @@ request.onsuccess = () => {
 
 const form = document.querySelector('form');
 
-form.addEventListener('submit', async (event) => {
+form.addEventListener('submit', (event) => {
   event.preventDefault();
 
   if (!form.name.value || !form.numbers.value)
@@ -60,28 +60,29 @@ form.addEventListener('submit', async (event) => {
     number: form.numbers.value,
   };
 
-  const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
-  const contacts = transaction.objectStore(DB_STORE_NAME);
+  // const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
+  // const contacts = transaction.objectStore(DB_STORE_NAME);
 
-  contacts.add(contact);
+  // contacts.add(contact);
+
+  let contacts = localStorage.getItem('contacts');
+  console.log(contacts);
+
+  if (!contacts) {
+    localStorage.setItem('contacts', JSON.stringify([contact]));
+  } else {
+    contacts = JSON.parse(localStorage.getItem('contacts'));
+    contacts = [...contacts, contact];
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }
+  renderContacts(contacts);
 
   form.name.value = '';
   form.numbers.value = '';
   form.name.focus();
-  // const store = transaction.objectStore(DB_STORE_NAME);
-  // let result;
-  // try {
-  //   store.add(contact);
-  // } catch (error) {}
-
-  // result.onsuccess = () => {
-  //   console.log('hi');
-  // };
 });
 
 const renderContacts = (contacts) => {
-  console.log(contacts);
-
   const html = contacts
     .map(
       (contact, index) => `
@@ -91,7 +92,7 @@ const renderContacts = (contacts) => {
     </div>
     <div class="contact-details">
       <div class="contact-title">${contact.name}</div>
-      <div class="contact-numbers">${contact.phone}</div>
+      <div class="contact-numbers">${contact.number}</div>
     </div>
     <div class="contact-options">
       <i class="material-icons">call</i>
@@ -114,20 +115,36 @@ contactsList.addEventListener('click', (event) => {
   console.log(event.target.getAttribute('data-index'));
   if (event.target.tagName === 'I') {
     const index = event.target.dataset.index;
-    console.log(index);
-    const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
-    const store = transaction.objectStore(DB_STORE_NAME);
+
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    const filteredContacts = contacts.filter(
+      (contact) => contact.number != contacts[index].number
+    );
+    localStorage.setItem('contacts', JSON.stringify(filteredContacts));
+    renderContacts(filteredContacts);
+    // const transaction = db.transaction(DB_STORE_NAME, 'readwrite');
+    // const store = transaction.objectStore(DB_STORE_NAME);
     // 이거왜 안되는지 모르겠음 ㅠㅠ
-    const deleteRequest = store.delete(event.target.getAttribute('data-index'));
+    // const deleteRequest = store.delete(event.target.getAttribute('data-index'));
 
-    transaction.oncomplete = () => {
-      console.log(deleteRequest);
-    };
+    // transaction.oncomplete = () => {
+    //   console.log(deleteRequest);
+    // };
 
-    const getRequest = store.getAll();
+    // const getRequest = store.getAll();
 
-    getRequest.onsuccess = function (event) {
-      renderContacts(getRequest.result);
-    };
+    // getRequest.onsuccess = function (event) {
+    //   renderContacts(getRequest.result);
+    // };
   }
 });
+
+// window.addEventListener('DOMContentLoaded', () => {
+//   console.log(JSON.parse(localStorage.getItem('contacts')));
+//   renderContacts(JSON.parse(localStorage.getItem('contacts')));
+// });
+
+setTimeout(() => {
+  console.log(JSON.parse(localStorage.getItem('contacts')));
+  renderContacts(JSON.parse(localStorage.getItem('contacts')));
+}, 1000);
